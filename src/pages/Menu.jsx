@@ -6,30 +6,6 @@ import Header from '../components/Header';
 
 export default function Menu() {  
   const [isLoading , setIsLoading] = useState(true);
-  
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 2500)
-  } , [])
-
-  return (
-    isLoading 
-    ? <Loading /> 
-    : (
-      <main className="w-full h-screen bg-cover bg-white-background flex flex-col overflow-hidden opacity-0 animate-showUp">
-        <div className="absolute top-0 left-0 w-full h-full grainy-background"></div>
-        <Header />
-        <FetchApiProvider>
-          <CategoriesMenu />
-        </FetchApiProvider>
-      </main>
-    )
-  );
-}
-
-
-/*
 
   useEffect(() => {
     const hasVisited = localStorage.getItem('hasVisitedMenu');
@@ -43,4 +19,17 @@ export default function Menu() {
       setIsLoading(false);
     }
   }, []);
-*/
+
+  return (
+    isLoading 
+    ? <Loading /> 
+    : (
+      <main className="relative w-full min-h-screen flex flex-col overflow-hidden opacity-0 animate-showUp dark:bg-valentino-red">
+        <div className="absolute top-0 left-0 w-full h-full grainy-background"></div>
+        <Header />
+          <CategoriesMenu />
+      </main>
+    )
+  );
+}
+
