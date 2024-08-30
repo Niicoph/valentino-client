@@ -23,7 +23,7 @@ export default function MenuOptions({ categoryId }) {
     }
 
     fetchPlates();
-  }, [categoryId]);
+  }, [categoryId, categoriesVisited]); 
 
   const sanitizeInput = (input) => {
     return input.replace(/<\/?[^>]+(>|$)/g, "");

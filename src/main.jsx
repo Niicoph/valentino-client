@@ -8,7 +8,7 @@ import './index.css';
 createRoot(document.getElementById('root')).render(
     <ColorModeProvider>
         <FetchApiProvider>
-            <AppRoutes />
+                <AppRoutes />
         </FetchApiProvider>
     </ColorModeProvider>
 );
