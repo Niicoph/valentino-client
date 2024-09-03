@@ -23,6 +23,12 @@ export default function AppRoutes() {
         <Route path="/" element={<EnterMenu />} />
         <Route path="/login" element={<Login />} />
         <Route path="/menu" element={<Menu />} />
+        <Route path="/categoria/agregar" element={<h1>agregar categoria</h1>} /> 
+        <Route path="/categoria/eliminar" element={<h1>eliminar categoria</h1>} />
+        <Route path="/categoria/actualizar" element={<h1>actualizar categoria</h1>} />
+        <Route path="/plato/agregar" element={<h1>agregar plato</h1>} />
+        <Route path="/plato/eliminar" element={<h1>eliminar plato</h1>} />
+        <Route path="/plato/actualizar" element={<h1>actualizar plato</h1>} />
         <Route path="*" element={<h1>not found</h1>} />
       </Routes>
     </Router>

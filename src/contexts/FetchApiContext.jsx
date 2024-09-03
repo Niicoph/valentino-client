@@ -28,7 +28,6 @@ const FetchApiProvider = ({children}) => {
         }
         fetchCategories();
     },[] )
-    console.log(categories);
     return (
         <FetchApiContext.Provider value={{categories, loading, error}}>
             {children}

@@ -19,6 +19,14 @@ export default {
         'saira-custom': ['Saira', 'sans-serif'],
       },
       keyframes: {
+        slideIn: {
+          '0%': { transform: 'translateX(-100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+        slideOut: {
+          '0%': { transform: 'translateX(0)', opacity: '1' },
+          '100%': { transform: 'translateX(-100%)', opacity: '0' },
+        },
         fadeLeft: {
           '0%, 100%': { transform: 'translateX(3px)' },
           '50%': { transform: 'translateX(6px) scale(1)' },
@@ -42,6 +50,8 @@ export default {
         'fade-infinite-right': 'fadeRight 1s infinite',
         'fade-infinite': 'smoothFade 1.7s infinite',
         'showUp' : 'showUp 0.5s ease-in-out 0.2s forwards',
+        'slide-in': 'slideIn 0.5s ease-out forwards',
+        'slide-out': 'slideOut 0.5s ease-in forwards',
       },
       boxShadow: {
         'custom': 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px', 

@@ -31,7 +31,7 @@ export default function Header() {
 
   return (
     <header className="w-full h-1/5 bg-valentino-red flex justify-center items-center dark:bg-white shadow-custom">
-      {navActive ? <Nav handleNav={handleNav} /> : null}
+      {navActive ? <Nav  navActive={navActive} handleNav={handleNav}  /> : null}
       <hr className="w-full dark:border-valentino-red" />
       <Link to={'/menu'} className="cursor-pointer z-10">
         <img src={Logo} alt="valentino-logo" width={800} height={800} />
