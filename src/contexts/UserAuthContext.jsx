@@ -5,8 +5,6 @@ export const UserAuthContext = createContext();
 const UserAuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -15,20 +13,19 @@ const UserAuthProvider = ({ children }) => {
           method: "GET",
           credentials: "include", 
           headers: {
-            "Content-Type": "application/json",
             Accept: "application/json",
           },
         });
 
         const data = await response.json();
-        if (response.ok && data.status) {
+        if (response.status === 200 && data) {
           setUser(true);
+        } else {
+          setUser(null);
         }
       } catch (error) {
         setError("Error al verificar la autenticación: " + error.message);
         setUser(null);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -36,7 +33,6 @@ const UserAuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    setLoading(true);
     setError(null);
     try {
       const response = await fetch("http://localhost:8000/api/login", {
@@ -49,21 +45,21 @@ const UserAuthProvider = ({ children }) => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-      if (response.ok && data.status) {
-        setUser(true); 
+      if (response.status === 200) {
+        setUser(true);
+      } else if (response.status === 422)  {
+          setError("Porfavor, rellene todos los campos");
+      } else if (response.status === 401) {
+          setError("Usuario o contraseña incorrectos");
       } else {
-        setError(data.message || "Error en el inicio de sesión");
+        setError(data.message || "Error al iniciar sesión");
       }
     } catch (error) {
       setError("Error al conectar con el servidor: " + error.message);
-    } finally {
-      setLoading(false);
     }
   };
 
   const logout = async () => {
-    setLoading(true);
-    setError(null);
     try {
       const response = await fetch("http://localhost:8000/api/logout", {
         method: "POST",
@@ -81,14 +77,12 @@ const UserAuthProvider = ({ children }) => {
       }
     } catch (error) {
       setError("Error al conectar con el servidor: " + error.message);
-    } finally {
-      setLoading(false);
     }
   };
 
 
   return (
-    <UserAuthContext.Provider value={{ error, user, login, logout, loading }}>
+    <UserAuthContext.Provider value={{ error, setError,  user, login, logout}}>
       {children}
     </UserAuthContext.Provider>
   );

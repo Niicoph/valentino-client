@@ -10,28 +10,32 @@ import Loading from "../components/Loading";
 
 export default function Login() {
   const { darkMode } = useContext(ColorModeContext);
-  const { login, error, loading, user } = useContext(UserAuthContext);
+  const { login, error, user } = useContext(UserAuthContext);
+  const [loading , setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [locallyLoading, setLocallyLoading] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(email, password);
+    setLoading(true);
+    setTimeout( () => {
+      login(email, password);
+      setLoading(false);
+    }, 1700);
   };
 
-  useEffect(() => {
+   useEffect(() => {
     if (user) {
+      setLoading(true);
       setTimeout(() => {
-        setLocallyLoading(false);
         window.location.href = "/menu";
-      }, 2000);
+      }, 1700);
     }
-  }, [user]);
+  }, [user, loading]);  
 
   return (
-    locallyLoading ? <Loading /> :
-    <main className="relative w-full h-screen flex flex-col dark:bg-valentino-red">
+    loading ? <Loading /> : 
+    <main className="relative w-full h-screen flex flex-col opacity-0 animate-showUp dark:bg-valentino-red">
       <div className="absolute top-0 left-0 w-full h-full grainy-background"></div>
       <Header />
       <section className="flex flex-col justify-center items-center w-full h-full">
@@ -72,15 +76,13 @@ export default function Login() {
           <button
             type="submit"
             className="bg-black h-12 w-full rounded-md text-white font-semibold"
-            disabled={loading}
           >
-            {loading ? "Cargando..." : "Login"}
+            Login
           </button>
         </form>
-        {error && <p className="text-red-600 font-semibold mt-10">{error}</p>}
+        {error && <p className="bg-red-800 p-4 rounded-md text-white font-semibold mt-10 z-20">{error} ❌ </p>}
+
       </section>
     </main>
   );
 }
-
-
