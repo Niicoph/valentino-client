@@ -1,20 +1,20 @@
-import AddSrc from "../../assets/Crud/Add.png";
-import Header from "../../components/Header";
-import { useState, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
-import { FetchApiContext } from "../../contexts/FetchApiContext";
+import Header from '../../components/Header';
+import AddSrc from '../../assets/Crud/Add.png';
+import { useState, useContext } from 'react';
+import { useNavigate} from 'react-router-dom';
+import { FetchApiContext } from '../../contexts/FetchApiContext';
 
-export default function AddCategory() {
-  const { addCategory } = useContext(FetchApiContext);
+export default function UpdateCategoryId({categoryId}) {
+  const {updateCategory} = useContext(FetchApiContext);
   const navigate = useNavigate();
   const [newCategory, setNewCategory] = useState(null);
   const [error, setError] = useState(null);
   const [form, setForm] = useState({
     name: '',
-    img_white: null,
-    img_white_selected: null,
-    img_dark: null,
-    img_dark_selected: null
+    img_white: '',
+    img_white_selected: '',
+    img_dark: '',
+    img_dark_selected: ''
   });
   const [fileNames, setFileNames] = useState({
     img_white: 'vacio',
@@ -44,12 +44,7 @@ export default function AddCategory() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.name && form.img_white && form.img_white_selected && form.img_dark && form.img_dark_selected) {
-      setError(null); 
-      await submitForm();
-    } else {
-      setError('Por favor, rellena todos los campos.');
-    }
+    submitForm();
   };
 
   const submitForm = async () => {
@@ -61,7 +56,7 @@ export default function AddCategory() {
       formData.append('img_dark', form.img_dark);
       formData.append('img_dark_selected', form.img_dark_selected);
 
-      const response = await fetch('http://localhost:8000/api/categorias', {
+      const response = await fetch(`http://localhost:8000/api/categorias/${categoryId}?_method=PUT`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -71,8 +66,8 @@ export default function AddCategory() {
       });
       try {
         if (response.ok) {
-          const newCategory = await response.json();
-          addCategory(newCategory);
+          const updatedCategory = await response.json();
+          updateCategory(updatedCategory);
           setNewCategory(true);
           setTimeout(() => {
             setNewCategory(false);
@@ -96,7 +91,7 @@ export default function AddCategory() {
       <div className="absolute top-0 left-0 w-full h-full grainy-background"></div>
       <Header />
       <section className="w-full h-4/5 flex flex-col justify-center items-center p-4 gap-4">
-        <h2 className="text-center text-black dark:text-white font-jetbrains-mono text-2xl font-semibold">Agregar Categoria</h2>
+        <h2 className="text-center text-black dark:text-white font-jetbrains-mono text-2xl font-semibold">Actualizar Categoria</h2>
         <form
           onSubmit={handleSubmit}
           className="w-2/5 h-3/4  rounded-lg flex justify-center items-center flex-col p-8 gap-8 dark:border-white shadow-card-crud"
@@ -167,14 +162,14 @@ export default function AddCategory() {
             onChange={handleChange}
             className="hidden"
           />
-          <button type="submit" className="z-20">
+          <button type="submit" className='z-20'>
             <img src={AddSrc} alt="Añadir" className="w-12 h-12 cursor-pointer" />
           </button>
           {error && <p className="text-red-500">{error}</p>}
           {newCategory && (
             <div className="absolute w-full h-full flex justify-center items-center bg-black bg-opacity-50 top-0 left-0 z-40">
               <div className="bg-white p-4 rounded-md">
-                ¡Categoría cargada! ✅
+                ¡Categoría actualizada! ✅
               </div>
             </div>
           )}

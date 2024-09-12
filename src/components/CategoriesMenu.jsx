@@ -3,7 +3,7 @@ import { FetchApiContext } from "../contexts/FetchApiContext"
 import CategoryCard from "./CategoryCard";
 
 
-export default function CategoriesMenu() {
+export default function CategoriesMenu({updateId}) {
   const {categories, loading, error} = useContext(FetchApiContext);
 
   if (loading) return <div>Loading...</div>
@@ -14,7 +14,7 @@ export default function CategoriesMenu() {
       <div className="w-fit h-fit flex flex-wrap  gap-5 p-2 justify-center items-center">
           { categories.map (category => {
             return (
-              <CategoryCard key={category.id} category={category} />
+              <CategoryCard key={category.id} category={category} updateId={updateId}/>
             )
           })}
       </div>
@@ -24,24 +24,3 @@ export default function CategoriesMenu() {
 
 
 
-/*
-
-EJEMPLO PARA ACTUALIZAR EL ESTADO DE CATEGORIAS -> tendriamos que utilizar un POST para agregar una nueva categoria 
-
-const ComponenteActualizar = () => {
-  const { categories, setCategories } = useContext(FetchApiContext);
-
-  const actualizarCategorias = () => {
-    const nuevasCategorias = [...categories, { id: 4, name: 'Nueva Categoría' }];
-    setCategories(nuevasCategorias);
-  };
-
-  return (
-    <div>
-      <button onClick={actualizarCategorias}>Agregar Categoría</button>
-    </div>
-  );
-};
-
-
-*/

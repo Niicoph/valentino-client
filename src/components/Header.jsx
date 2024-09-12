@@ -31,7 +31,7 @@ export default function Header() {
 
   return (
     <header className="w-full h-1/5 bg-valentino-red flex justify-center items-center dark:bg-white shadow-custom">
-      {navActive ? <Nav  navActive={navActive} handleNav={handleNav}  /> : null}
+      {navActive ? <Nav  navActive={navActive} handleNav={handleNav}  /> :  null}
       <hr className="w-full dark:border-valentino-red" />
       <Link to={'/menu'} className="cursor-pointer z-10">
         <img src={Logo} alt="valentino-logo" width={800} height={800} />
@@ -48,7 +48,7 @@ export default function Header() {
       <img
         src={darkMode ? NavDark : NavWhite}
         alt="nav icon"
-        className="absolute w-8 h-8 left-4 top-4 z-10 cursor-pointer"
+        className={`w-8 h-8 left-4 top-4 absolute ${isEnterMenu ? 'opacity-0' : 'opacity-100 z-10'}  cursor-pointer`}
         onClick={handleNav}
       />
     </header>

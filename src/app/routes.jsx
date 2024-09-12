@@ -1,15 +1,28 @@
+import { useContext } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import EnterMenu from '../pages/EnterMenu'; 
 import Menu from '../pages/Menu'; 
-import { FetchApiContext } from '../contexts/FetchApiContext';
-import { useContext } from 'react';
 import MenuDetails from '../pages/MenuDetails';
 import Login from '../pages/Login';
-import AddCategory from '../pages/Categories/AddCategory';
 import ProtectedRoutes from './ProtectedRoutes';
+import { UserAuthContext } from '../contexts/UserAuthContext';
+import { FetchApiContext } from '../contexts/FetchApiContext';
+import { FetchPlatesContext } from '../contexts/FetchPlatesContext';
+
+import AddCategory from '../pages/Categories/AddCategory';
+import DeleteCategory from '../pages/Categories/DeleteCategory';
+import UpdateCategory from '../pages/Categories/UpdateCategory';
+import UpdateCategoryId from '../pages/Categories/UpdateCategoryId';
+import AddPlate from '../pages/Plates/AddPlate';
+import DeletePlate from '../pages/Plates/DeletePlate';
+import UpdatePlate from '../pages/Plates/UpdatePlate';
+import UpdatePlateId from '../pages/Plates/UpdatePlateId';
+import Plates from '../pages/Plates/Plates';
 
 export default function AppRoutes() {
   const { categories } = useContext(FetchApiContext); 
+  const { plates } = useContext(FetchPlatesContext);
+  const { userSession } = useContext(UserAuthContext);
 
   return (
     <Router>
@@ -26,12 +39,29 @@ export default function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/menu" element={<Menu />} />
         {/* Protected routes */}
-        <Route path="/categoria/agregar" element={<ProtectedRoutes><AddCategory/></ProtectedRoutes>} />
-        <Route path="/categoria/eliminar" element={<ProtectedRoutes><h1>eliminar categoria</h1></ProtectedRoutes>} />
-        <Route path="/categoria/actualizar" element={<ProtectedRoutes><h1>actualizar categoria</h1></ProtectedRoutes>} />
-        <Route path="/plato/agregar" element={<ProtectedRoutes><h1>agregar plato</h1></ProtectedRoutes>} />
-        <Route path="/plato/eliminar" element={<ProtectedRoutes><h1>eliminar plato</h1></ProtectedRoutes>} />
-        <Route path="/plato/actualizar" element={<ProtectedRoutes><h1>actualizar plato</h1></ProtectedRoutes>} />
+        <Route path="/categoria/agregar" element={<ProtectedRoutes userSession={userSession}> <AddCategory/> </ProtectedRoutes>} />
+        <Route path="/categoria/eliminar" element={<ProtectedRoutes userSession={userSession}> <DeleteCategory/> </ProtectedRoutes>} />
+        <Route path="/categoria/actualizar" element={<ProtectedRoutes userSession={userSession}> <UpdateCategory/> </ProtectedRoutes>} />
+        {categories.map(category => (
+          <Route 
+            key={category.id} 
+            path={`/categoria/actualizar/${category.id}`} 
+            element={<ProtectedRoutes userSession={userSession}> <UpdateCategoryId categoryId={category.id}/> </ProtectedRoutes>} 
+          />
+        ))}
+        <Route path="/platos" element={<ProtectedRoutes userSession={userSession}> <Plates categories={categories} plates={plates}/> </ProtectedRoutes>} />
+        <Route path="/plato/agregar" element={<ProtectedRoutes userSession={userSession}>  <AddPlate categories={categories}/> </ProtectedRoutes>} />
+        <Route path="/plato/eliminar" element={<ProtectedRoutes userSession={userSession}> <DeletePlate categories={categories}/> </ProtectedRoutes>} />
+        <Route path="/plato/actualizar" element={<ProtectedRoutes userSession={userSession}> <UpdatePlate categories={categories}/> </ProtectedRoutes>} />
+        {
+          plates.map(plate => (
+            <Route 
+              key={plate.id} 
+              path={`/plato/actualizar/${plate.id}`} 
+              element={<ProtectedRoutes userSession={userSession}> <UpdatePlateId categories={categories} plate={plate}/> </ProtectedRoutes>} 
+            />
+          ))
+        }
         {/* default route */}
         <Route path="*" element={<h1>not found</h1>} />
       </Routes>

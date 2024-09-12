@@ -5,6 +5,7 @@ export const UserAuthContext = createContext();
 const UserAuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
+  const userSession = sessionStorage.getItem("user");
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -19,9 +20,11 @@ const UserAuthProvider = ({ children }) => {
 
         const data = await response.json();
         if (response.status === 200 && data) {
+          sessionStorage.setItem("user", JSON.stringify('true'));
           setUser(true);
         } else {
           setUser(null);
+          sessionStorage.removeItem("user");
         }
       } catch (error) {
         setError("Error al verificar la autenticación: " + error.message);
@@ -46,6 +49,7 @@ const UserAuthProvider = ({ children }) => {
       });
       const data = await response.json();
       if (response.status === 200) {
+        sessionStorage.setItem("user", JSON.stringify('true'));
         setUser(true);
       } else if (response.status === 422)  {
           setError("Porfavor, rellene todos los campos");
@@ -71,6 +75,7 @@ const UserAuthProvider = ({ children }) => {
       });
       const data = await response.json();
       if (response.ok && data.status) {
+        sessionStorage.removeItem("user");
         setUser(null);
       } else {
         setError(data.message || "Error al cerrar sesión");
@@ -82,7 +87,7 @@ const UserAuthProvider = ({ children }) => {
 
 
   return (
-    <UserAuthContext.Provider value={{ error, setError,  user, login, logout}}>
+    <UserAuthContext.Provider value={{ error, setError,  user, login, logout , userSession}}>
       {children}
     </UserAuthContext.Provider>
   );

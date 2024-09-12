@@ -8,6 +8,7 @@ export default function Nav({ handleNav , navActive}) {
     const { user } = useContext(UserAuthContext);
     const currentLocation = useLocation().pathname;
 
+
     const handleClose = async () => {
         const nav = document.getElementById('nav');
         nav.classList.remove('animate-slide-in');
@@ -26,7 +27,7 @@ export default function Nav({ handleNav , navActive}) {
     return (
       <section
         id = "nav"
-        className={`w-full h-full bg-white absolute z-20 left-0 top-0 transition-transform duration-500 ${
+        className={`w-full h-full bg-white absolute z-30 left-0 top-0 transition-transform duration-500 ${
           navActive ? 'animate-slide-in' : ''
         }`}
       >
