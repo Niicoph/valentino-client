@@ -10,6 +10,8 @@ export default function Slider() {
   const locationPath = location.pathname.split('/')[2];
   const slider = useRef(null);
 
+  // definimos una base url para las imágenes
+  const baseUrl = "https://valentinomenu.com/api/"
 
   const sortedCategories = [...categories].sort((a, b) => {
     if (a.nombre === locationPath) return -1;
@@ -39,13 +41,13 @@ export default function Slider() {
               >
                 {locationPath === category.nombre ? (
                   <img
-                    src={darkMode ? `http://localhost:8000/${imgSrcDarkSelected}` : `http://localhost:8000/${imgSrcSelected}`}
+                    src={darkMode ? `${baseUrl}${imgSrcDarkSelected}` : `${baseUrl}${imgSrcSelected}`}
                     alt={category.nombre}
                     className="w-10 h-10"
                   />
                 ) : (
                   <img
-                    src={darkMode ? `http://localhost:8000/${imgSrcDark}` : `http://localhost:8000/${imgSrc}`}
+                    src={darkMode ? `${baseUrl}${imgSrcDark}` : `${baseUrl}${imgSrc}`}
                     alt={category.nombre}
                     className="w-10 h-10"
                   />

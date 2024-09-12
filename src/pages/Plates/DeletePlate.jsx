@@ -29,7 +29,7 @@ export default function DeletePlate({ categories }) {
     async function deletePlate() {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/platos/${id}`,
+          `${import.meta.env.VITE_API_BASE_URL}/platos/${id}`,
           {
             method: "DELETE",
             credentials: "include",

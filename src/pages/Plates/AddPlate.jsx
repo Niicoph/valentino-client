@@ -40,7 +40,7 @@ export default function AddPlate({ categories }) {
       formData.append("valor", form.valor);
       formData.append("categoria_id", form.categoria_id);
 
-      const response = await fetch("http://localhost:8000/api/platos", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/platos`, {
         method: "POST",
         credentials: "include",
         headers: {

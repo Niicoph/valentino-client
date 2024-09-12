@@ -16,7 +16,7 @@ export default function DeleteCategory() {
     if (id) {
       async function deleteCat() {
         try {
-          const response = await fetch(`http://localhost:8000/api/categorias/${id}`, {
+          const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/categorias/${id}`, {
             method: 'DELETE',
             credentials: 'include',
             headers: {

@@ -10,7 +10,7 @@ const UserAuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/isAuth", {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/isAuth`, {
           method: "GET",
           credentials: "include", 
           headers: {
@@ -38,7 +38,7 @@ const UserAuthProvider = ({ children }) => {
   const login = async (email, password) => {
     setError(null);
     try {
-      const response = await fetch("http://localhost:8000/api/login", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/login`, {
         method: "POST",
         credentials: "include", 
         headers: {
@@ -65,7 +65,7 @@ const UserAuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/logout", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/logout`, {
         method: "POST",
         credentials: "include",
         headers: {

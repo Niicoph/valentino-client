@@ -37,7 +37,7 @@ export default function UpdatePlateId({ plate, categories }) {
       formData.append('valor', form.valor);
       formData.append('categoria_id', form.categoria_id);
 
-      const response = await fetch(`http://localhost:8000/api/platos/${plate.id}?_method=PUT`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/platos/${plate.id}?_method=PUT`, {
         method: 'POST',
         credentials: 'include',
         headers: {

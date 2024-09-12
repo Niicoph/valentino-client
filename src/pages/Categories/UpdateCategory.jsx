@@ -13,8 +13,6 @@ export default function UpdateCategory() {
     setId(id);
   }
 
-
-
   return (
     <main className="relative w-full min-h-screen flex flex-col overflow-hidden opacity-0 animate-showUp dark:bg-valentino-red" id="test">
       <div className="absolute top-0 left-0 w-full h-full grainy-background"></div>

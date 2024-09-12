@@ -1,18 +1,22 @@
-// CategoryCard.js
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { ColorModeContext } from "../contexts/ColorMode";
 import { useLocation } from "react-router-dom";
-import DeleteSrc from "../assets/Crud/Delete.png"; 
-import UpdateSrc from "../assets/Crud/Update.png"; 
+import DeleteSrc from "../assets/Crud/Delete.png"; // Imagen de eliminación
+import UpdateSrc from "../assets/Crud/Update.png"; // Imagen de actualización
 
 export default function CategoryCard({ category, updateId }) {
   const { darkMode } = useContext(ColorModeContext);
   const location = useLocation();
   const deleteMenu = location.pathname.includes("eliminar");
   const updateMenu = location.pathname.includes("actualizar");
-  const imgSrc = category.img_light.replace("public", "storage");
-  const imgSrcDark = category.img_dark.replace("public", "storage");
+
+  // definimos una base url para las imágenes
+  const baseUrl = "https://valentinomenu.com/api/"
+
+  const imgSrc = category.img_light.replace("public", "storage");  
+  const imgSrcDark = category.img_dark.replace("public", "storage"); 
+
   const Container = deleteMenu || updateMenu ? "div" : Link;
   const containerProps =
     deleteMenu || updateMenu
@@ -49,7 +53,7 @@ export default function CategoryCard({ category, updateId }) {
 
       {/* Imagen principal de la categoría */}
       <img
-        src={`http://localhost:8000/${darkMode ? imgSrcDark : imgSrc}`}
+        src={`${baseUrl}${darkMode ? imgSrcDark : imgSrc}`}
         alt={category.nombre}
         width={60}
         height={60}

@@ -12,7 +12,7 @@ export default function MenuOptions({ categoryId }) {
     async function fetchPlates() {
       try {
         if (!categoriesVisited.includes(categoryId)) {
-          const response = await fetch(`http://localhost:8000/api/platos/categoria/${categoryId}`);
+          const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/platos/categoria/${categoryId}`);
           const data = await response.json();
           setPlates(prevPlates => [...prevPlates, ...data]);
           setCategoriesVisited(prevVisited => [...prevVisited, categoryId]);

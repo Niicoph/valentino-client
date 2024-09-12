@@ -61,7 +61,7 @@ export default function AddCategory() {
       formData.append('img_dark', form.img_dark);
       formData.append('img_dark_selected', form.img_dark_selected);
 
-      const response = await fetch('http://localhost:8000/api/categorias', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/categorias`, {
         method: 'POST',
         credentials: 'include',
         headers: {

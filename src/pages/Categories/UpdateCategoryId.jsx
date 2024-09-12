@@ -56,7 +56,7 @@ export default function UpdateCategoryId({categoryId, categoryName}) {
       formData.append('img_dark', form.img_dark);
       formData.append('img_dark_selected', form.img_dark_selected);
 
-      const response = await fetch(`http://localhost:8000/api/categorias/${categoryId}?_method=PUT`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/categorias/${categoryId}?_method=PUT`, {
         method: 'POST',
         credentials: 'include',
         headers: {

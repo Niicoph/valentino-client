@@ -10,7 +10,7 @@ const FetchPlatesProvider = ({ children }) => {
     useEffect( () => {
         async function fetchPlates() {
             try {
-                const response = await fetch('http://127.0.0.1:8000/api/platos');
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/platos`);
                 if (!response.ok) {
                     throw new Error('Something went wrong');
                 }
