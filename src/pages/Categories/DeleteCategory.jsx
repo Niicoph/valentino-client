@@ -43,6 +43,7 @@ export default function DeleteCategory() {
       <div className="absolute top-0 left-0 w-full h-full grainy-background"></div>
       <Header />
       <CategoriesMenu updateId={updateId} />
+      {error && <p className="text-white text-center text-2xl">{error}</p>}
     </main>
   );
 }

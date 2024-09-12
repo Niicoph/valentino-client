@@ -4,13 +4,13 @@ import { useState, useContext } from 'react';
 import { useNavigate} from 'react-router-dom';
 import { FetchApiContext } from '../../contexts/FetchApiContext';
 
-export default function UpdateCategoryId({categoryId}) {
+export default function UpdateCategoryId({categoryId, categoryName}) {
   const {updateCategory} = useContext(FetchApiContext);
   const navigate = useNavigate();
   const [newCategory, setNewCategory] = useState(null);
   const [error, setError] = useState(null);
   const [form, setForm] = useState({
-    name: '',
+    name: categoryName,
     img_white: '',
     img_white_selected: '',
     img_dark: '',
@@ -104,7 +104,7 @@ export default function UpdateCategoryId({categoryId}) {
             placeholder="Nombre"
             value={form.name}
             onChange={handleChange}
-            className="border-b border-black bg-transparent font-valentino-font focus:outline-none w-3/4 dark:placeholder:text-white dark:text-white dark:border-white z-10 cursor-pointer"
+            className="border-b border-black bg-transparent font-valentino-font focus:outline-none w-3/4 dark:placeholder:text-white dark:text-white dark:border-white z-10 cursor-pointer  placeholder:text-black"
           />
           <label
             htmlFor="img_white"

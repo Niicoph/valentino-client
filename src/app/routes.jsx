@@ -46,7 +46,7 @@ export default function AppRoutes() {
           <Route 
             key={category.id} 
             path={`/categoria/actualizar/${category.id}`} 
-            element={<ProtectedRoutes userSession={userSession}> <UpdateCategoryId categoryId={category.id}/> </ProtectedRoutes>} 
+            element={<ProtectedRoutes userSession={userSession}> <UpdateCategoryId categoryId={category.id} categoryName={category.nombre}/> </ProtectedRoutes>} 
           />
         ))}
         <Route path="/platos" element={<ProtectedRoutes userSession={userSession}> <Plates categories={categories} plates={plates}/> </ProtectedRoutes>} />

@@ -6,6 +6,10 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      screens: {
+        'short' : {'raw': '(max-height: 800px)'},
+        'short-wide' : {'raw': '(max-width: 250px)'},
+      },
       backgroundImage: {
         'white-background': "url('src/assets/Backgrounds/bg_white.png')",
         'red-background': "url('src/assets/Backgrounds/bg_red.jpg')",
