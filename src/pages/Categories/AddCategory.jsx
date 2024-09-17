@@ -92,14 +92,14 @@ export default function AddCategory() {
   };
 
   return (
-    <main className="w-full h-screen bg-bg-main bg-contain opacity-0 animate-showUp dark:bg-bg-main-red">
+    <main className="w-full h-screen opacity-0 animate-showUp dark:bg-valentino-red">
       <div className="absolute top-0 left-0 w-full h-full grainy-background"></div>
       <Header />
       <section className="w-full h-4/5 flex flex-col justify-center items-center p-4 gap-4">
         <h2 className="text-center text-black dark:text-white font-jetbrains-mono text-2xl font-semibold">Agregar Categoria</h2>
         <form
           onSubmit={handleSubmit}
-          className="w-2/5 h-3/4  rounded-lg flex justify-center items-center flex-col p-8 gap-8 dark:border-white shadow-card-crud"
+          className="w-2/5 h-3/4  rounded-lg flex justify-center items-center flex-col p-8 gap-8  shadow-card-crud dark:shadow-card-crud-white"
         >
           <input
             type="text"
@@ -109,7 +109,7 @@ export default function AddCategory() {
             placeholder="Nombre"
             value={form.name}
             onChange={handleChange}
-            className="border-b border-black bg-transparent font-valentino-font focus:outline-none w-3/4 dark:placeholder:text-white dark:text-white dark:border-white z-10 cursor-pointer"
+            className="border-b border-black bg-transparent font-valentino-font focus:outline-none w-3/4 dark:placeholder:text-white dark:text-white dark:border-white z-10 cursor-pointer placeholder:text-black"
           />
           <label
             htmlFor="img_white"

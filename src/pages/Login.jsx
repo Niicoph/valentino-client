@@ -40,7 +40,7 @@ export default function Login() {
       <Header />
       <section className="flex flex-col justify-center items-center w-full h-full">
         <form
-          className="w-3/4 h-fit z-10 flex flex-col justify-center items-center gap-4"
+          className="w-3/4 h-fit z-10 flex flex-col justify-center items-center gap-4 sm:w-1/4"
           onSubmit={handleSubmit}
         >
           <div className="relative w-full">

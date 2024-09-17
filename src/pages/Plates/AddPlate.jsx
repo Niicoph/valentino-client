@@ -1,9 +1,11 @@
 import Header from "../../components/Header";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import AddSrc from "../../assets/Crud/Add.png";
 import { useNavigate } from "react-router-dom";
+import { FetchPlatesContext } from "../../contexts/FetchPlatesContext";
 
 export default function AddPlate({ categories }) {
+  const { addPlate } = useContext(FetchPlatesContext);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [newPlate, setNewPlate] = useState(null);
@@ -26,8 +28,12 @@ export default function AddPlate({ categories }) {
     if (!form.nombre || !form.descripcion || !form.valor || !form.categoria_id) {
       setError("Todos los campos son obligatorios");
     } else {
-      setError(null);
-      submitForm();
+      if (isNaN(form.valor) || form.valor.includes(".") || form.valor.includes(",")) {
+        setError("El valor debe ser un número y  no debe incluir puntos o comas");
+      } else {
+        setError(null);
+        submitForm();
+      }
     }
   }
 
@@ -50,6 +56,7 @@ export default function AddPlate({ categories }) {
       });
       if (response.ok) {
         const newPlate = await response.json();
+        addPlate(newPlate);
         setNewPlate(newPlate);
         setTimeout( () => {
           setNewPlate(false)
@@ -63,7 +70,7 @@ export default function AddPlate({ categories }) {
 
 
   return (
-    <main className="w-full h-screen bg-bg-main bg-contain opacity-0 animate-showUp dark:bg-bg-main-red">
+    <main className="w-full h-screen opacity-0 animate-showUp dark:bg-valentino-red">
       <div className="absolute top-0 left-0 w-full h-full grainy-background"></div>
       <Header />
       <section className="w-full h-4/5 flex flex-col justify-center items-center p-4 gap-4">
@@ -72,7 +79,7 @@ export default function AddPlate({ categories }) {
         </h2>
         <form
           onSubmit={handleSubmit}
-          className="w-2/5 h-3/4 rounded-lg flex justify-center items-center flex-col p-8 gap-8 dark:border-white shadow-card-crud"
+          className="w-2/5 h-3/4 rounded-lg flex justify-center items-center flex-col p-8 gap-8 dark:shadow-card-crud-white shadow-card-crud"
         >
           <input
             type="text"
@@ -97,7 +104,7 @@ export default function AddPlate({ categories }) {
             type="text"
             name="valor"
             id="valor"
-            placeholder="Valor"
+            placeholder="Valor (sin puntos ni comas)"
             value={form.valor}
             onChange={handleChange}
             className="border-b border-black bg-transparent font-valentino-font focus:outline-none w-3/4 dark:placeholder:text-white dark:text-white dark:border-white z-10 cursor-pointer placeholder:text-black"
@@ -120,7 +127,7 @@ export default function AddPlate({ categories }) {
           <button type="submit" className="z-20">
             <img src={AddSrc} alt="Añadir" className="w-12 h-12 cursor-pointer" />
           </button>
-          {error && <p className="text-red-500">{error}</p>}
+          {error && <p className="text-red-500 dark:text-white">{error}</p>}
           {newPlate && (
             <div className="absolute w-full h-full flex justify-center items-center bg-black bg-opacity-50 top-0 left-0 z-40">
               <div className="bg-white p-4 rounded-md">

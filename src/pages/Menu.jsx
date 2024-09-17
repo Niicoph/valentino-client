@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
-import FetchApiProvider from "../contexts/FetchApiContext";
 import CategoriesMenu from "../components/CategoriesMenu";
 import Header from '../components/Header';
 

@@ -52,7 +52,7 @@ export default function UpdatePlateId({ plate, categories }) {
         setNewPlate(true);
         setTimeout(() => {
           setNewPlate(false);
-          navigate('/menu');
+          navigate('/platos');
         }, 2000);
       } else {
         setError('Hubo un problema al procesar la solicitud.');
@@ -64,7 +64,7 @@ export default function UpdatePlateId({ plate, categories }) {
   };
 
   return (
-    <main className="w-full h-screen bg-bg-main bg-contain opacity-0 animate-showUp dark:bg-bg-main-red">
+    <main className="w-full h-screen opacity-0 animate-showUp dark:bg-valentino-red">
       <div className="absolute top-0 left-0 w-full h-full grainy-background"></div>
       <Header />
       <section className="w-full h-4/5 flex flex-col justify-center items-center p-4 gap-4">
@@ -73,7 +73,7 @@ export default function UpdatePlateId({ plate, categories }) {
         </h2>
         <form
           onSubmit={handleSubmit}
-          className="w-2/5 h-3/4 rounded-lg flex justify-center items-center flex-col p-8 gap-8 dark:border-white shadow-card-crud"
+          className="w-2/5 h-3/4 rounded-lg flex justify-center items-center flex-col p-8 gap-8 dark:shadow-card-crud-white shadow-card-crud"
         >
           <input
             type="text"

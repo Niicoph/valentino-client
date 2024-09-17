@@ -23,7 +23,7 @@ export default function Plates({ categories , plates}) {
 
 
   return (
-    <main className="relative w-full min-h-screen bg-bg-main bg-contain opacity-0 animate-showUp dark:bg-bg-main-red">
+    <main className="relative w-full min-h-screen opacity-0 animate-showUp dark:bg-valentino-red">
       <div className="absolute top-0 left-0 w-full h-full grainy-background"></div>
       <Header />
       <section className="w-full h-4/5 flex flex-col items-center p-4 gap-4">
@@ -66,7 +66,7 @@ export default function Plates({ categories , plates}) {
             );
           })}
         </div>
-        {error && <p className="text-red-600">{error}</p>}
+        {error && <p className="text-red-600 dark:text-white">{error}</p>}
       </section>
     </main>
   );

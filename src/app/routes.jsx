@@ -9,6 +9,7 @@ import { UserAuthContext } from '../contexts/UserAuthContext';
 import { FetchApiContext } from '../contexts/FetchApiContext';
 import { FetchPlatesContext } from '../contexts/FetchPlatesContext';
 
+import NotFound from '../pages/NotFound';
 import AddCategory from '../pages/Categories/AddCategory';
 import DeleteCategory from '../pages/Categories/DeleteCategory';
 import UpdateCategory from '../pages/Categories/UpdateCategory';
@@ -63,7 +64,7 @@ export default function AppRoutes() {
           ))
         }
         {/* default route */}
-        <Route path="*" element={<h1>not found</h1>} />
+        <Route path="*" element={<NotFound/>} />
       </Routes>
     </Router>
   );
