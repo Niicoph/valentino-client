@@ -31,8 +31,9 @@ const UserAuthProvider = ({ children }) => {
         setUser(null);
       }
     };
-
-    checkAuth();
+    checkAuth(); // ejecutamos el auth al cargar
+    const interval = setInterval( checkAuth, 10 * 60 * 1000);
+    return () => clearInterval(interval);
   }, []);
 
   const login = async (email, password) => {
